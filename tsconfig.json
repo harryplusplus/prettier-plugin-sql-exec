@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "module": "node20",
+    "moduleResolution": "node16",
+    "strict": true,
+    "target": "es2020",
+    "verbatimModuleSyntax": true,
+    "outDir": "./dist"
+  },
+  "include": ["./src/**/*.ts"],
+  "exclude": ["**/*.test.ts"]
+}
