@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/harryplusplus/prettier-plugin-sql-exec/compare/v1.0.0...v1.0.1) (2025-10-28)
+
+
+### Bug Fixes
+
+* Remove cjs ([7a72470](https://github.com/harryplusplus/prettier-plugin-sql-exec/commit/7a72470bfba4f1fab8e8afedaf59bf48a794087a))
+
 # 1.0.0 (2025-10-28)
 
 
