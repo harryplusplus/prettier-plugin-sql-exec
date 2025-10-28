@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/harryplusplus/prettier-plugin-sql-exec/compare/v1.0.1...v1.0.2) (2025-10-28)
+
+
+### Bug Fixes
+
+* Add object shape exports for cjs ([84c0f36](https://github.com/harryplusplus/prettier-plugin-sql-exec/commit/84c0f36db1bf10bebe764be1add08c7829361e93))
+
 ## [1.0.1](https://github.com/harryplusplus/prettier-plugin-sql-exec/compare/v1.0.0...v1.0.1) (2025-10-28)
 
 
