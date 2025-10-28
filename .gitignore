@@ -3,6 +3,3 @@ node_modules/
 
 # Build
 dist/
-
-# Temporary files
-1temp/
