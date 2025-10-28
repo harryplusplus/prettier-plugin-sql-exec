@@ -1,12 +1,17 @@
 {
   "name": "prettier-plugin-sql-exec",
-  "version": "0.1.0",
+  "version": "0.0.0-development",
   "description": "A Prettier plugin that formats SQL by executing a formatting command.",
   "keywords": [
     "sql",
     "format",
     "prettier"
   ],
+  "homepage": "https://github.com/harryplusplus/prettier-plugin-sql-exec#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harryplusplus/prettier-plugin-sql-exec.git"
+  },
   "license": "MIT",
   "author": {
     "name": "harryplusplus",
@@ -28,15 +33,42 @@
     "build": "tsup",
     "test:integration": "vitest --run tests"
   },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/github",
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "CHANGELOG.md"
+          ],
+          "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        }
+      ]
+    ]
+  },
   "devDependencies": {
+    "@semantic-release/changelog": "6.0.3",
+    "@semantic-release/git": "10.0.1",
     "@types/node": "24.9.1",
     "prettier": "3.6.2",
+    "semantic-release": "25.0.1",
     "sort-package-json": "3.4.0",
     "tsup": "8.5.0",
     "typescript": "5.9.3",
     "vitest": "4.0.4"
   },
   "packageManager": "pnpm@10.15.1",
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "provenance": true
+  },
   "tsup": {
     "entry": [
       "src/index.ts"
