@@ -10,6 +10,10 @@ const sqlParser: Parser<string> = {
   locEnd: () => -1,
 };
 
+export const parsers = {
+  sql: sqlParser,
+};
+
 const sqlExecAstPrinter: Printer<string> = {
   print: (path, options) => {
     const text = path.node;
@@ -24,6 +28,10 @@ const sqlExecAstPrinter: Printer<string> = {
     });
     return output;
   },
+};
+
+export const printers = {
+  [SQL_EXEC_AST]: sqlExecAstPrinter,
 };
 
 export interface SqlExecOptions {
@@ -41,7 +49,7 @@ export interface SqlExecOptions {
   cwd?: string;
 }
 
-const options: Record<keyof SqlExecOptions, SupportOption> = {
+export const options: Record<keyof SqlExecOptions, SupportOption> = {
   command: {
     category: "Format",
     type: "string",
@@ -54,14 +62,8 @@ const options: Record<keyof SqlExecOptions, SupportOption> = {
   },
 };
 
-const plugin: Plugin<string> = {
+export default {
   options,
-  parsers: {
-    sql: sqlParser,
-  },
-  printers: {
-    [SQL_EXEC_AST]: sqlExecAstPrinter,
-  },
-};
-
-export default plugin;
+  parsers,
+  printers,
+} satisfies Plugin<string>;
