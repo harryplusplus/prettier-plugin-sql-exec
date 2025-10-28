@@ -3,6 +3,27 @@ import type { Parser, Plugin, Printer, SupportOption } from "prettier";
 
 const SQL_EXEC_AST = "sql-exec-ast";
 
+export interface SqlExecOptions {
+  /**
+   * Formatting command to execute.
+   *
+   * It must take input from **STDIN** and output the formatted text to **STDOUT**, then **exit**.
+   * If your formatter doesn’t support this or needs **environment variables** set, wrap it with a simple shell script, Node.js, or Python script.
+   *
+   * The command’s working directory is resolved from the `PWD` environment variable if present; otherwise, the default value (`process.cwd()`) is used.
+   * Within the VSCode Prettier extension service, `process.cwd()` is always set to `"/"`, while the actual project path is provided through the `PWD` environment variable.
+   */
+  sqlExecCommand: string;
+}
+
+export const options: Record<keyof SqlExecOptions, SupportOption> = {
+  sqlExecCommand: {
+    category: "Format",
+    type: "string",
+    description: "Formatting command to execute.",
+  },
+};
+
 const sqlParser: Parser<string> = {
   parse: (text) => text,
   astFormat: SQL_EXEC_AST,
@@ -16,50 +37,30 @@ export const parsers = {
 
 const sqlExecAstPrinter: Printer<string> = {
   print: (path, options) => {
-    const text = path.node;
+    const input = path.node;
 
-    const command = options.command ? String(options.command) : "";
-    const cwd = options.cwd ? String(options.cwd) : undefined;
+    const { sqlExecCommand } = options;
+    const command =
+      typeof sqlExecCommand === "string" ? sqlExecCommand : undefined;
+    if (!command) {
+      return input;
+    }
+
+    // Please see the JSDoc for `SqlExecOptions.sqlExecCommand`.
+    const cwd = process.env["PWD"] || undefined;
 
     const output = execSync(command, {
       encoding: "utf8",
-      input: text,
+      input,
       cwd,
     });
+
     return output;
   },
 };
 
 export const printers = {
   [SQL_EXEC_AST]: sqlExecAstPrinter,
-};
-
-export interface SqlExecOptions {
-  /**
-   * Formatting command to execute.
-   *
-   * It must take input from **STDIN** and output the formatted text to **STDOUT**, then **exit**.
-   * If your formatter doesn’t support this or needs **environment variables** set, wrap it with a simple shell script, Node.js, or Python script.
-   */
-  command: string;
-
-  /**
-   * Working directory for command execution.
-   */
-  cwd?: string;
-}
-
-export const options: Record<keyof SqlExecOptions, SupportOption> = {
-  command: {
-    category: "Format",
-    type: "string",
-    description: "Formatting command to execute.",
-  },
-  cwd: {
-    category: "Format",
-    type: "path",
-    description: "Working directory for command execution.",
-  },
 };
 
 export default {

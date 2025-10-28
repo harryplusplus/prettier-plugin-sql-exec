@@ -42,8 +42,7 @@ Sample Prettier config:
 // .prettierrc.json
 {
   "plugins": ["prettier-plugin-embed", "prettier-plugin-sql-exec"],
-  "command": "perl pgFormatter/pg_format",
-  "cwd": "/absolute/path/to/project"
+  "sqlExecCommand": "perl pgFormatter/pg_format"
 }
 ```
 
@@ -72,16 +71,16 @@ const name = "John Doe";
 const age = 30;
 
 const users = await sql`
-  insert into users (name, age)
-    values (${name}, ${age})
-  returning
-    name, age
+  INSERT INTO users (name, age)
+      VALUES (${name}, ${age})
+  RETURNING
+      name, age
 `;
 ```
 
 ## Options
 
-### `command`
+### `sqlExecCommand`
 
 _**(required)**_
 
@@ -90,15 +89,8 @@ Formatting command to execute.
 It must take input from **STDIN** and output the formatted text to **STDOUT**, then **exit**.
 If your formatter doesn’t support this or needs **environment variables** set, wrap it with a simple shell script, Node.js, or Python script.
 
-### `cwd`
-
-_**(optional)**_
-
-Working directory for command execution.
-
-> [!WARNING]  
-> If you use the VS Code Prettier extension, the extension runs Prettier from the filesystem root (/) by default—not the project directory.
-> An absolute path is recommended for reliability.
+The command’s working directory is resolved from the `PWD` environment variable if present; otherwise, the default value (`process.cwd()`) is used.
+Within the VSCode Prettier extension service, `process.cwd()` is always set to `"/"`, while the actual project path is provided through the `PWD` environment variable.
 
 ## Development
 

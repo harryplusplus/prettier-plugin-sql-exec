@@ -23,25 +23,12 @@ beforeAll(async () => {
   }
 });
 
-test("command only", async () => {
+test("parser sql", async () => {
   const code = "select 1";
   const output = await format(code, {
     parser: "sql",
     plugins: [PLUGIN_PATH],
-    command: "perl third_party/pgFormatter/pg_format",
-  });
-  expect(output).toBe(`SELECT
-    1
-`);
-});
-
-test("command with cwd", async () => {
-  const code = "select 1";
-  const output = await format(code, {
-    parser: "sql",
-    plugins: [PLUGIN_PATH],
-    command: "perl pg_format",
-    cwd: "third_party/pgFormatter",
+    sqlExecCommand: "perl third_party/pgFormatter/pg_format",
   });
   expect(output).toBe(`SELECT
     1
@@ -61,8 +48,8 @@ const users = await sql\`INSERT INTO  users(name, age) VALUES (\${name}, \${age}
   const output = await format(code, {
     filepath: "main.ts",
     plugins: ["prettier-plugin-embed", PLUGIN_PATH],
-    command: "perl pg_format --keyword-case 1 --spaces 2",
-    cwd: "third_party/pgFormatter",
+    sqlExecCommand:
+      "perl third_party/pgFormatter/pg_format --keyword-case 1 --spaces 2",
   });
   expect(output).toBe(`import postgres from "postgres";
 
