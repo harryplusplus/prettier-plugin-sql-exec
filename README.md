@@ -36,10 +36,9 @@ git clone --branch v5.8 --depth 1 https://github.com/darold/pgFormatter.git
 > pgFormatter requires a Perl runtime.
 > Perl is included by default on macOS.
 
-Sample Prettier config:
+Sample Prettier config (.prettierrc.json):
 
 ```json
-// .prettierrc.json
 {
   "plugins": ["prettier-plugin-embed", "prettier-plugin-sql-exec"],
   "sqlExecCommand": "perl pgFormatter/pg_format"
