@@ -112,7 +112,7 @@ It must take input from **STDIN** and output the formatted text to **STDOUT**, t
 If your formatter doesn’t support this or needs **environment variables** set, wrap it with a simple shell script, Node.js, or Python script.
 
 The command’s working directory is resolved from the `PWD` environment variable if present; otherwise, the default value (`process.cwd()`) is used.
-Within the VSCode Prettier extension service, `process.cwd()` is always set to `"/"`, while the actual project path is provided through the `PWD` environment variable.
+Within the VS Code Prettier extension service, `process.cwd()` is always set to `"/"`, while the actual project path is provided through the `PWD` environment variable.
 
 ## Development
 
