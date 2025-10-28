@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/harryplusplus/prettier-plugin-sql-exec/compare/v1.0.2...v1.0.3) (2025-10-28)
+
+
+### Bug Fixes
+
+* Update readme for npm ([2217d03](https://github.com/harryplusplus/prettier-plugin-sql-exec/commit/2217d0356e91ae0fb91a462f139cdb8cc5d023b3))
+
 ## [1.0.2](https://github.com/harryplusplus/prettier-plugin-sql-exec/compare/v1.0.1...v1.0.2) (2025-10-28)
 
 
