@@ -38,13 +38,13 @@ git clone --branch v5.8 --depth 1 https://github.com/darold/pgFormatter.git
 
 Sample Prettier config:
 
-```javascript
-// prettier.config.js
-export default {
-  plugins: ["prettier-plugin-embed", "prettier-plugin-sql-exec"],
-  command: "perl pg_format --keyword-case 1 --spaces 2",
-  cwd: "/absolute/my/project/pgFormatter",
-};
+```json
+// .prettierrc.json
+{
+  "plugins": ["prettier-plugin-embed", "prettier-plugin-sql-exec"],
+  "command": "perl pgFormatter/pg_format",
+  "cwd": "/absolute/path/to/project"
+}
 ```
 
 TypeScript before formatting:
