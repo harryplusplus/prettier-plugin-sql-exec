@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/harryplusplus/prettier-plugin-sql-exec/compare/v1.1.1...v1.1.2) (2025-10-28)
+
+
+### Bug Fixes
+
+* Update Why I Created This Library section. ([ce05d4a](https://github.com/harryplusplus/prettier-plugin-sql-exec/commit/ce05d4a8924d2bf3f3d9a7e26c28d88438db241e))
+
 ## [1.1.1](https://github.com/harryplusplus/prettier-plugin-sql-exec/compare/v1.1.0...v1.1.1) (2025-10-28)
 
 
