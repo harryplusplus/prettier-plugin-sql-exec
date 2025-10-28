@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/harryplusplus/prettier-plugin-sql-exec/compare/v1.0.3...v1.1.0) (2025-10-28)
+
+
+### Features
+
+* Support VSCode Prettier extension without explicit cwd options. ([e102886](https://github.com/harryplusplus/prettier-plugin-sql-exec/commit/e102886fef63974287dcc1768e5b74d16d32abb5))
+
 ## [1.0.3](https://github.com/harryplusplus/prettier-plugin-sql-exec/compare/v1.0.2...v1.0.3) (2025-10-28)
 
 
