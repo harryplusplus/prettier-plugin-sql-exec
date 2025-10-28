@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/harryplusplus/prettier-plugin-sql-exec/compare/v1.1.2...v1.1.3) (2025-10-28)
+
+
+### Bug Fixes
+
+* Fix typo VS Code ([742f2ea](https://github.com/harryplusplus/prettier-plugin-sql-exec/commit/742f2eaef70a30800bb0d945c51f7ffca6aece60))
+
 ## [1.1.2](https://github.com/harryplusplus/prettier-plugin-sql-exec/compare/v1.1.1...v1.1.2) (2025-10-28)
 
 
