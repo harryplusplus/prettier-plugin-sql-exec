@@ -23,7 +23,7 @@ beforeAll(async () => {
   }
 });
 
-test("pgFormatter", async () => {
+test("command only", async () => {
   const code = "select 1";
   const output = await format(code, {
     parser: "sql",
@@ -32,5 +32,50 @@ test("pgFormatter", async () => {
   });
   expect(output).toBe(`SELECT
     1
+`);
+});
+
+test("command with cwd", async () => {
+  const code = "select 1";
+  const output = await format(code, {
+    parser: "sql",
+    plugins: [PLUGIN_PATH],
+    command: "perl pg_format",
+    cwd: "third_party/pgFormatter",
+  });
+  expect(output).toBe(`SELECT
+    1
+`);
+});
+
+test("with prettier-plugin-embed", async () => {
+  const code = `import postgres from "postgres";
+
+const sql = postgres();
+  
+const name = "John Doe";
+const age = 30;
+  
+const users = await sql\`INSERT INTO  users(name, age) VALUES (\${name}, \${age})  RETURNING name, age\`;
+`;
+  const output = await format(code, {
+    filepath: "main.ts",
+    plugins: ["prettier-plugin-embed", PLUGIN_PATH],
+    command: "perl pg_format --keyword-case 1 --spaces 2",
+    cwd: "third_party/pgFormatter",
+  });
+  expect(output).toBe(`import postgres from "postgres";
+
+const sql = postgres();
+
+const name = "John Doe";
+const age = 30;
+
+const users = await sql\`
+  insert into users (name, age)
+    values (\${name}, \${age})
+  returning
+    name, age
+\`;
 `);
 });

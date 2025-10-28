@@ -13,10 +13,14 @@ const sqlParser: Parser<string> = {
 const sqlExecAstPrinter: Printer<string> = {
   print: (path, options) => {
     const text = path.node;
-    const command = String(options.command);
+
+    const command = options.command ? String(options.command) : "";
+    const cwd = options.cwd ? String(options.cwd) : undefined;
+
     const output = execSync(command, {
       encoding: "utf8",
       input: text,
+      cwd,
     });
     return output;
   },
@@ -24,16 +28,29 @@ const sqlExecAstPrinter: Printer<string> = {
 
 export interface SqlExecOptions {
   /**
-   * Command to run for formatting. Input is passed via stdin.
+   * Formatting command to execute.
+   *
+   * It must take input from **STDIN** and output the formatted text to **STDOUT**, then **exit**.
+   * If your formatter doesn’t support this or needs **environment variables** set, wrap it with a simple shell script, Node.js, or Python script.
    */
   command: string;
+
+  /**
+   * Working directory for command execution.
+   */
+  cwd?: string;
 }
 
 const options: Record<keyof SqlExecOptions, SupportOption> = {
   command: {
     category: "Format",
     type: "string",
-    description: "Command to run for formatting. Input is passed via stdin.",
+    description: "Formatting command to execute.",
+  },
+  cwd: {
+    category: "Format",
+    type: "path",
+    description: "Working directory for command execution.",
   },
 };
 
