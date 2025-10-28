@@ -1,7 +1,7 @@
 {
   "name": "prettier-plugin-sql-exec",
   "version": "0.0.0-development",
-  "description": "A Prettier plugin that formats SQL by executing a formatting command.",
+  "description": "A Prettier plugin for extensible SQL formatting via any command-line formatter.",
   "keywords": [
     "sql",
     "format",

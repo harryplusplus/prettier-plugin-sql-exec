@@ -1,5 +1,7 @@
 # prettier-plugin-sql-exec
 
+A Prettier plugin for extensible SQL formatting via any command-line formatter.
+
 ## Why I Created This Library
 
 Most existing SQL formatters cannot correctly parse or format SQL strings that include template variables.
